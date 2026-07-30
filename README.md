@@ -4,6 +4,8 @@ A product concept demo: a confidential internal mobility marketplace for enterpr
 
 **Live demo:** [transfer-portal-plum.vercel.app](https://transfer-portal-plum.vercel.app)
 
+![Walkthrough: Maya publishes, Derek browses redacted profiles and expresses interest, Maya accepts, her name reveals in Derek's view, Priya sees nothing, June sees suppressed aggregates](docs/walkthrough.gif)
+
 ## The problem
 
 Internal mobility fails not because companies lack a job board, but because signaling intent to move is unsafe. The moment an employee tells their manager they want a change, they become a flight risk. So they say nothing, interview externally, and the company finds out at resignation. Hiring managers with open headcount recruit outside because movable internal talent is invisible.
