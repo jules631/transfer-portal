@@ -5,8 +5,10 @@ import type { Employee, Interest, Listing } from "./types";
  * The visibility engine. Everything the product promises lives here.
  *
  * Rule 1: A listing is invisible to the seeker's entire reporting line,
- *         everyone above them and everyone below them. A report learning
- *         their manager wants out is the same failure as the reverse.
+ *         everyone above them and everyone below them, and to the
+ *         seeker's own team. Exclusion follows one test: no ability to
+ *         hire the seeker, plus the context to unmask them. A teammate
+ *         fails it hardest of anyone in the company.
  * Rule 2: Outside the reporting line, a listing is anonymized until the
  *         seeker accepts a specific manager's interest. The seeker holds
  *         the reveal key.
@@ -51,6 +53,23 @@ export function inReportingLineOf(
   return isInChainOf(viewerId, employeeId) || isInChainOf(employeeId, viewerId);
 }
 
+/**
+ * The team rule. A teammate can never hire the seeker onto the team they
+ * already share, and no one in the company is better equipped to unmask
+ * an anonymized card. Zero legitimate demand, maximum context: excluded.
+ */
+export function isTeammateOf(viewerId: string, employeeId: string): boolean {
+  return employeeById(viewerId).team === employeeById(employeeId).team;
+}
+
+/** True when this viewer must never know the listing exists. */
+export function isExcludedFrom(viewerId: string, employeeId: string): boolean {
+  return (
+    inReportingLineOf(viewerId, employeeId) ||
+    isTeammateOf(viewerId, employeeId)
+  );
+}
+
 /** Listings a given viewer is allowed to know exist. */
 export function listingsVisibleTo(
   viewerId: string,
@@ -60,17 +79,20 @@ export function listingsVisibleTo(
     (l) =>
       l.status === "active" &&
       l.employeeId !== viewerId &&
-      !inReportingLineOf(viewerId, l.employeeId),
+      !isExcludedFrom(viewerId, l.employeeId),
   );
 }
 
-/** Listings hidden from this viewer specifically by the reporting line rule. */
+/** Listings hidden from this viewer specifically by the exclusion rules. */
 export function listingsHiddenFrom(
   viewerId: string,
   listings: Listing[],
 ): Listing[] {
   return listings.filter(
-    (l) => l.status === "active" && inReportingLineOf(viewerId, l.employeeId),
+    (l) =>
+      l.status === "active" &&
+      l.employeeId !== viewerId &&
+      isExcludedFrom(viewerId, l.employeeId),
   );
 }
 

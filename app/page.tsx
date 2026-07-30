@@ -3,7 +3,7 @@ import Link from "next/link";
 const RULES = [
   {
     title: "The chain is blind",
-    body: "A listing is invisible to the seeker's entire reporting line, everyone above them and everyone below them. Not a setting. No admin override.",
+    body: "A listing is invisible to the seeker's entire reporting line, everyone above them and everyone below them, and to their own teammates. Not a setting. No admin override.",
   },
   {
     title: "The seeker holds the key",
@@ -31,6 +31,14 @@ const OBJECTIONS = [
   {
     q: "What stops people from chasing roles above their level?",
     a: "There is no apply button to abuse. Level and tenure come from the HR system, not self description, and demand approaches supply: a manager sees the level on the card before expressing interest, so a mismatch dies before a name is ever revealed.",
+  },
+  {
+    q: "Can the seeker's own teammates see the card?",
+    a: "No. Exclusion follows one test: no ability to hire you, plus the context to unmask you. A teammate fails it hardest, since they cannot hire you onto the team you already share and they recognize your skills instantly. Browsing itself also requires demand: supply is visible only to identified hiring managers, never to curious peers.",
+  },
+  {
+    q: "If a manager's whole org is blind, how does anyone move inside a big org?",
+    a: "The exclusion is drawn around each seeker, not around the org. A manager of a sibling team inside the same large org is not in your reporting line, so they see your card and can hire you. The only blocked pairing is a hiring manager who sits directly above you, and that case is served by the public side of the market: every open role shows its manager's name, so a seeker can always choose to reveal themselves. The portal blocks discovery, never choice.",
   },
   {
     q: "Does this not just help managers lose their people?",

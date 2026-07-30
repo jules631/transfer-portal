@@ -1,7 +1,7 @@
 "use client";
 
 import { DemoNote } from "@/components/demo-note";
-import { employeeById, teamName } from "@/lib/org";
+import { EMPLOYEES, employeeById, teamName } from "@/lib/org";
 import { useStore } from "@/lib/store";
 import { managementChain } from "@/lib/visibility";
 
@@ -9,7 +9,12 @@ export function EmployeeView() {
   const { state, dispatch } = useStore();
   const maya = employeeById("e-maya");
   const listing = state.listings.find((l) => l.employeeId === maya.id)!;
-  const chain = managementChain(maya.id).map((id) => employeeById(id));
+  const chainIds = managementChain(maya.id);
+  const chain = chainIds.map((id) => employeeById(id));
+  const teammates = EMPLOYEES.filter(
+    (e) =>
+      e.team === maya.team && e.id !== maya.id && !chainIds.includes(e.id),
+  );
   const interests = state.interests.filter((i) => i.listingId === listing.id);
   const accepted = interests.find((i) => i.status === "accepted");
 
@@ -178,11 +183,19 @@ export function EmployeeView() {
                 <span className="text-ink-soft"> · {m.title}</span>
               </li>
             ))}
+            {teammates.map((m) => (
+              <li key={m.id} className="text-sm">
+                <span className="font-semibold">{m.name}</span>
+                <span className="text-ink-soft"> · teammate</span>
+              </li>
+            ))}
           </ul>
           <p className="mt-3 text-xs leading-relaxed text-ink-soft">
-            Your entire reporting line is excluded automatically, everyone
-            above you and anyone below you, based on the HR system. This is
-            not a setting. It cannot be turned off by an admin.
+            Your reporting line and your own team are excluded automatically,
+            based on the HR system. Teammates cannot hire you onto the team
+            you already share, and they are the people best placed to
+            recognize you through a redaction. This is not a setting. It
+            cannot be turned off by an admin.
           </p>
         </section>
 

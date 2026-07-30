@@ -16,7 +16,7 @@ Every incumbent talent marketplace assumes the manager sees everything, so the s
 
 ## The four visibility rules
 
-1. **The chain is blind.** A listing is invisible to the seeker's entire reporting line, everyone above them and everyone below them. Not a setting. No admin override.
+1. **The chain is blind.** A listing is invisible to the seeker's entire reporting line, everyone above them and everyone below them, and to their own teammates. Exclusion follows one test: no ability to hire you, plus the context to unmask you. Not a setting. No admin override.
 2. **The seeker holds the key.** Everyone else sees an anonymized profile. A name appears only when the seeker accepts a specific manager's interest.
 3. **Demand is public, supply is protected.** Hiring managers are always identified. The person with the safe position carries the exposure.
 4. **Swaps need consent.** A manager joins a match involving their own report, with a backfill headcount on the table, only after the employee explicitly allows it.
@@ -45,6 +45,12 @@ Because posted openings lag true demand by months. The manager who knows a depar
 
 **What keeps people from chasing roles above their level?**
 There is no apply button to abuse. Level and tenure come from the HR system, not self description, and demand approaches supply: a manager sees the level on the anonymized card before expressing interest, so a mismatch dies before a name is ever revealed. Matches default to lateral moves, and whether a listing surfaces one level up is a company policy switch, not a seeker choice.
+
+**Can the seeker's own teammates see the card?**
+No. A teammate cannot hire you onto the team you already share, and no one in the company is better equipped to resolve an anonymized card to a name. Zero legitimate demand plus maximum unmasking context means the whole team is excluded, and browsing itself requires demand: supply is visible only to identified hiring managers, never to curious peers.
+
+**If a manager's whole org is blind, how does anyone move inside a big org?**
+The exclusion is drawn around each seeker, not around the org. A manager of a sibling team inside the same large org is not in your reporting line, so they see your card and can hire you, which keeps the most common transfer of all, the move one team over, fully alive. The only blocked pairing is a hiring manager who sits directly above you, and that case is served by the public side of the market: every open role shows its manager's name, so a seeker can always choose to reveal themselves to someone in their chain. The portal blocks discovery, never choice.
 
 **Does this not just help managers lose their people?**
 It converts resignation surprise into internal transfer. The company keeps the person, and three quiet listings on one team become a coaching signal in aggregate instead of three exit interviews, while every individual stays protected.
