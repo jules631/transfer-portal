@@ -55,6 +55,9 @@ The exclusion is drawn around each seeker, not around the org. A manager of a si
 **Does this not just help managers lose their people?**
 It converts resignation surprise into internal transfer. The company keeps the person, and three quiet listings on one team become a coaching signal in aggregate instead of three exit interviews, while every individual stays protected.
 
+**What happens to the team that loses someone?**
+The seat vacated by an internal transfer stays with the losing team. That policy ships with the product, not beside it, because a manager who loses the headcount along with the person will rationally fight every transfer, and managers who cannot see listings will fight the system instead. With the seat safe, the losing manager's worst case is a hiring process with a real transition window instead of a two week notice after a surprise resignation. The company keeps the person either way, which is the whole point.
+
 **If this is a good idea, why does it not already exist?**
 Every incumbent talent marketplace assumes the manager sees everything, because the buyer historically demanded it, so the supply side never shows up and the tools fill with manager nominated project work instead. The pattern is already proven externally: open to work on LinkedIn hides your signal from your own employer. Nobody has turned that assumption inward, because the organization that has to buy this product is the same one it disciplines.
 

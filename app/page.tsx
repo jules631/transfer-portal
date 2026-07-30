@@ -19,6 +19,39 @@ const RULES = [
   },
 ];
 
+const STEPS = [
+  {
+    actor: "Maya",
+    title: "A seeker publishes",
+    body: "Maya lists her intent to move. Her reporting line and her whole team are excluded before the listing exists anywhere.",
+  },
+  {
+    actor: "Derek",
+    title: "A hiring manager browses",
+    body: "Derek, hiring for an open role, sees an anonymized card: discipline, level, tenure band. No name, no team.",
+  },
+  {
+    actor: "Derek",
+    title: "Interest goes on the record",
+    body: "Derek expresses interest under his own name, with his role and a note. Demand is public, so he commits his identity first.",
+  },
+  {
+    actor: "Maya",
+    title: "The seeker decides",
+    body: "Maya sees exactly who is asking and accepts or declines quietly. A decline tells Derek nothing, and he never learned who she was.",
+  },
+  {
+    actor: "Both",
+    title: "The reveal",
+    body: "On accept, her name unmasks for Derek alone. They talk. A swap that brings her manager in happens only if Maya allows it.",
+  },
+  {
+    actor: "June",
+    title: "The transfer executes",
+    body: "It completes as a normal internal transfer. Through it all, People saw only suppressed aggregates, and a failed match leaves no trace.",
+  },
+];
+
 const OBJECTIONS = [
   {
     q: "Will the counts expose people on small teams?",
@@ -43,6 +76,10 @@ const OBJECTIONS = [
   {
     q: "Does this not just help managers lose their people?",
     a: "It converts resignation surprise into internal transfer. The company keeps the person, and quiet listings on one team become a coaching signal in aggregate instead of a string of exit interviews.",
+  },
+  {
+    q: "What happens to the team that loses someone?",
+    a: "The seat vacated by an internal transfer stays with the losing team, and that policy ships with the product, because a manager who loses the headcount along with the person will rationally fight every transfer. With the seat safe, the losing manager's worst case is a hiring process with a real transition window instead of a two week notice after a surprise resignation. The company keeps the person either way.",
   },
   {
     q: "Why does this not already exist?",
@@ -134,6 +171,45 @@ export default function Home() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Workflow */}
+      <section className="border-t border-line">
+        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+          <h2 className="font-display text-2xl font-bold">
+            How a transfer happens
+          </h2>
+          <p className="mt-2 max-w-2xl text-ink-soft">
+            The whole loop, start to finish. Every step is walkable in the
+            demo.
+          </p>
+          <ol className="mt-8">
+            {STEPS.map((s, i) => (
+              <li key={s.title} className="relative flex gap-4 pb-8 last:pb-0">
+                {i < STEPS.length - 1 && (
+                  <span
+                    aria-hidden
+                    className="absolute left-[15px] top-8 h-full w-px bg-line"
+                  />
+                )}
+                <span className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal font-mono text-sm font-bold text-white">
+                  {i + 1}
+                </span>
+                <div className="pt-1">
+                  <p className="font-semibold">
+                    {s.title}{" "}
+                    <span className="ml-1 font-mono text-[11px] font-normal uppercase tracking-widest text-teal-deep">
+                      {s.actor}
+                    </span>
+                  </p>
+                  <p className="mt-1 max-w-xl text-sm leading-relaxed text-ink-soft">
+                    {s.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
