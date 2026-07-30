@@ -106,7 +106,7 @@ const PERSONA_CARDS = [
   {
     name: "June Park",
     role: "People team",
-    sees: "Aggregates only, suppressed below three per group. No names, ever.",
+    sees: "Aggregates only, suppressed for small counts and small teams. No names, ever.",
   },
 ];
 
