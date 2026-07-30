@@ -180,9 +180,9 @@ export function EmployeeView() {
             ))}
           </ul>
           <p className="mt-3 text-xs leading-relaxed text-ink-soft">
-            Your entire management chain is excluded automatically, based on
-            reporting lines in the HR system. This is not a setting. It cannot
-            be turned off by an admin.
+            Your entire reporting line is excluded automatically, everyone
+            above you and anyone below you, based on the HR system. This is
+            not a setting. It cannot be turned off by an admin.
           </p>
         </section>
 

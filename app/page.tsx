@@ -3,7 +3,7 @@ import Link from "next/link";
 const RULES = [
   {
     title: "The chain is blind",
-    body: "A listing is invisible to the seeker's entire management chain, all the way up. Not a setting. No admin override.",
+    body: "A listing is invisible to the seeker's entire reporting line, everyone above them and everyone below them. Not a setting. No admin override.",
   },
   {
     title: "The seeker holds the key",
@@ -16,6 +16,29 @@ const RULES = [
   {
     title: "Swaps need consent",
     body: "A manager can be brought into a match involving their own report, with a backfill headcount on the table, only after the employee explicitly allows it.",
+  },
+];
+
+const OBJECTIONS = [
+  {
+    q: "Will the counts expose people on small teams?",
+    a: "Aggregates suppress a department on two tests: too few listings, or listings covering most of a small team. At real scale the design adds headcount floors, ranges instead of exact numbers, and delayed snapshots with no query interface to compare against over time.",
+  },
+  {
+    q: "Why not just ask the hiring manager directly?",
+    a: "Posted openings lag true demand by months, and every hallway conversation is a leak with no rules attached. One listing reaches every manager with present or future demand, and a failed search costs nothing, because nobody ever knew who you were.",
+  },
+  {
+    q: "What stops people from chasing roles above their level?",
+    a: "There is no apply button to abuse. Level and tenure come from the HR system, not self description, and demand approaches supply: a manager sees the level on the card before expressing interest, so a mismatch dies before a name is ever revealed.",
+  },
+  {
+    q: "Does this not just help managers lose their people?",
+    a: "It converts resignation surprise into internal transfer. The company keeps the person, and quiet listings on one team become a coaching signal in aggregate instead of a string of exit interviews.",
+  },
+  {
+    q: "Why does this not already exist?",
+    a: "Every incumbent talent marketplace assumes the manager sees everything, so the supply side never lists. The confidential pattern is already proven externally, where open to work hides your signal from your own employer. Nobody has turned it inward, because the organization that has to buy this product is the same one it disciplines.",
   },
 ];
 
@@ -122,6 +145,32 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Objections */}
+      <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+        <h2 className="font-display text-2xl font-bold">The objections</h2>
+        <p className="mt-2 max-w-2xl text-ink-soft">
+          The hesitations this design has to survive, answered straight.
+        </p>
+        <div className="mt-6 divide-y divide-line rounded-xl border border-line bg-card">
+          {OBJECTIONS.map((o) => (
+            <details key={o.q} className="group px-5 py-4">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+                {o.q}
+                <span
+                  aria-hidden
+                  className="text-ink-faint transition-transform group-open:rotate-45"
+                >
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                {o.a}
+              </p>
+            </details>
+          ))}
         </div>
       </section>
 

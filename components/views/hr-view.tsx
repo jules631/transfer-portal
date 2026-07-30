@@ -43,8 +43,9 @@ export function HRView() {
             Active listings by department
           </h2>
           <p className="mt-1 text-sm text-ink-soft">
-            Departments with fewer than {K_ANONYMITY} listings are suppressed
-            so totals cannot point at a person.
+            Departments are suppressed below {K_ANONYMITY} listings, or when
+            listings cover most of a small team, so totals cannot point at a
+            person.
           </p>
 
           <div className="mt-6 space-y-3">
@@ -78,7 +79,7 @@ export function HRView() {
                   {suppressed.length === 1 ? "dept" : "depts"}
                 </span>
                 <span className="font-mono text-xs uppercase tracking-widest text-ink-faint">
-                  Suppressed · under {K_ANONYMITY} listings each
+                  Suppressed · protecting small groups
                 </span>
                 <span />
               </div>
@@ -101,8 +102,10 @@ export function HRView() {
           <DemoNote>
             Publish or match listings as the other personas and these numbers
             move. The suppressed row is load bearing: a department with one
-            listing plus a curious manager equals an unmasked employee, so
-            the count never renders below the threshold.
+            listing plus a curious manager equals an unmasked employee. A
+            count never renders below the threshold, and never when listings
+            cover most of a small team, because three listings on a four
+            person team implicates everyone at once.
           </DemoNote>
         </div>
       </div>

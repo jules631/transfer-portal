@@ -4,18 +4,24 @@ import type { Employee, Interest, Listing } from "./types";
 /**
  * The visibility engine. Everything the product promises lives here.
  *
- * Rule 1: A listing is invisible to everyone in the seeker's management
- *         chain, all the way up. Not just the direct manager.
- * Rule 2: Outside the chain, a listing is anonymized until the seeker
- *         accepts a specific manager's interest. The seeker holds the
- *         reveal key.
+ * Rule 1: A listing is invisible to the seeker's entire reporting line,
+ *         everyone above them and everyone below them. A report learning
+ *         their manager wants out is the same failure as the reverse.
+ * Rule 2: Outside the reporting line, a listing is anonymized until the
+ *         seeker accepts a specific manager's interest. The seeker holds
+ *         the reveal key.
  * Rule 3: Hiring managers are always identified. Asymmetry is the point:
  *         demand is public, supply is protected.
  * Rule 4: Aggregate reporting suppresses any group smaller than
- *         K_ANONYMITY listings so totals cannot unmask individuals.
+ *         K_ANONYMITY listings, and any group where listings cover more
+ *         than MAX_TEAM_SHARE of the team's headcount, so totals cannot
+ *         unmask individuals in small teams.
  */
 
 export const K_ANONYMITY = 3;
+
+/** A team's visible listing count may never cover more than half the team. */
+export const MAX_TEAM_SHARE = 0.5;
 
 /** Every manager above this employee, walking managerId to the top. */
 export function managementChain(employeeId: string): string[] {
@@ -28,9 +34,21 @@ export function managementChain(employeeId: string): string[] {
   return chain;
 }
 
-/** Rule 1. */
+/** True when the viewer sits anywhere above this employee. */
 export function isInChainOf(viewerId: string, employeeId: string): boolean {
   return managementChain(employeeId).includes(viewerId);
+}
+
+/**
+ * Rule 1. The exclusion runs both directions: the seeker's chain above,
+ * and the seeker's subtree below. Excluding only the chain would let a
+ * listing manager's own reports browse their manager's card.
+ */
+export function inReportingLineOf(
+  viewerId: string,
+  employeeId: string,
+): boolean {
+  return isInChainOf(viewerId, employeeId) || isInChainOf(employeeId, viewerId);
 }
 
 /** Listings a given viewer is allowed to know exist. */
@@ -42,17 +60,17 @@ export function listingsVisibleTo(
     (l) =>
       l.status === "active" &&
       l.employeeId !== viewerId &&
-      !isInChainOf(viewerId, l.employeeId),
+      !inReportingLineOf(viewerId, l.employeeId),
   );
 }
 
-/** Listings hidden from this viewer specifically by the chain rule. */
+/** Listings hidden from this viewer specifically by the reporting line rule. */
 export function listingsHiddenFrom(
   viewerId: string,
   listings: Listing[],
 ): Listing[] {
   return listings.filter(
-    (l) => l.status === "active" && isInChainOf(viewerId, l.employeeId),
+    (l) => l.status === "active" && inReportingLineOf(viewerId, l.employeeId),
   );
 }
 
@@ -92,7 +110,12 @@ export function discipline(title: string): string {
   return "General";
 }
 
-/** Rule 4: department totals below the threshold are suppressed. */
+/**
+ * Rule 4: a department is suppressed on either of two tests. Too few
+ * listings, and a count points at individuals. Listings covering most of
+ * a small team, and a count implicates the whole team at once: three
+ * listings on a four person team exposes everyone at 75 percent odds.
+ */
 export function aggregateByTeam(
   listings: Listing[],
 ): { teamId: string; count: number; suppressed: boolean }[] {
@@ -102,9 +125,12 @@ export function aggregateByTeam(
     const team = employeeById(l.employeeId).team;
     counts.set(team, (counts.get(team) ?? 0) + 1);
   }
-  return [...counts.entries()].map(([teamId, count]) => ({
-    teamId,
-    count,
-    suppressed: count < K_ANONYMITY,
-  }));
+  return [...counts.entries()].map(([teamId, count]) => {
+    const headcount = EMPLOYEES.filter((e) => e.team === teamId).length;
+    return {
+      teamId,
+      count,
+      suppressed: count < K_ANONYMITY || count > headcount * MAX_TEAM_SHARE,
+    };
+  });
 }
