@@ -1,6 +1,6 @@
 # Transfer Portal
 
-A product concept demo: a confidential internal mobility marketplace for enterprises.
+A confidential internal mobility marketplace for enterprises. Built from a real problem, not a hypothetical: inside most companies, the safest way to change jobs is to quit.
 
 **Live demo:** [transfer-portal-plum.vercel.app](https://transfer-portal-plum.vercel.app)
 
@@ -32,6 +32,25 @@ One seeded company, four views of the same moment. Walk it in three minutes:
 5. **June Park** in People sees aggregates only, suppressed below three per group.
 
 All state lives in the browser and resets on refresh. Meridian Systems and everyone in it are fictional.
+
+## The objections
+
+The hesitations this design has to survive, answered at the altitude an executive would ask them.
+
+**Will listing counts expose people on small teams?**
+Suppressing small counts is not enough on its own. The design also requires a headcount floor before a department appears in aggregates at all, shows ranges instead of exact numbers in delayed snapshots, and offers no query interface to run comparisons against over time. The sharpest leak is actually free text: a note that says "payments risk models" names a team no redaction bar can hide, which is why the listing composer should show every seeker how identifying their own words are before they publish.
+
+**Why would anyone not just walk over and ask the hiring manager?**
+Because posted openings lag true demand by months. The manager who knows a departure is coming, or has budget landing next quarter, is invisible to a hallway search, and every direct conversation is a leak with no rules attached. One listing reaches every manager with present or future demand, and a failed search costs the seeker nothing, because nobody ever knew who they were.
+
+**What keeps people from chasing roles above their level?**
+There is no apply button to abuse. Level and tenure come from the HR system, not self description, and demand approaches supply: a manager sees the level on the anonymized card before expressing interest, so a mismatch dies before a name is ever revealed. Matches default to lateral moves, and whether a listing surfaces one level up is a company policy switch, not a seeker choice.
+
+**Does this not just help managers lose their people?**
+It converts resignation surprise into internal transfer. The company keeps the person, and three quiet listings on one team become a coaching signal in aggregate instead of three exit interviews, while every individual stays protected.
+
+**If this is a good idea, why does it not already exist?**
+Every incumbent talent marketplace assumes the manager sees everything, because the buyer historically demanded it, so the supply side never shows up and the tools fill with manager nominated project work instead. The pattern is already proven externally: open to work on LinkedIn hides your signal from your own employer. Nobody has turned that assumption inward, because the organization that has to buy this product is the same one it disciplines.
 
 ## Honest limits
 
